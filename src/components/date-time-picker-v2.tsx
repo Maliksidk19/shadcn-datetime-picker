@@ -126,30 +126,27 @@ export function DateTimePickerV2() {
                           field.onChange(newDate);
                         }
                       }}
-                      // open={open}
                     >
-                      <SelectTrigger className="font-normal focus:ring-0 w-[120px] mt-4 mr-2">
+                      <SelectTrigger className="font-normal focus:ring-0 w-[120px]">
                         <SelectValue />
                       </SelectTrigger>
-                      <div>
-                        <SelectContent className="border-none shadow-none mt-2">
-                          <ScrollArea className="h-[15rem]">
-                            {Array.from({ length: 96 }).map((_, i) => {
-                              const hour = Math.floor(i / 4)
-                                .toString()
-                                .padStart(2, "0");
-                              const minute = ((i % 4) * 15)
-                                .toString()
-                                .padStart(2, "0");
-                              return (
-                                <SelectItem key={i} value={`${hour}:${minute}`}>
-                                  {hour}:{minute}
-                                </SelectItem>
-                              );
-                            })}
-                          </ScrollArea>
-                        </SelectContent>
-                      </div>
+                      <SelectContent>
+                        <ScrollArea className="h-[15rem]">
+                          {Array.from({ length: 96 }).map((_, i) => {
+                            const hour = Math.floor(i / 4)
+                              .toString()
+                              .padStart(2, "0");
+                            const minute = ((i % 4) * 15)
+                              .toString()
+                              .padStart(2, "0");
+                            return (
+                              <SelectItem key={i} value={`${hour}:${minute}`}>
+                                {hour}:{minute}
+                              </SelectItem>
+                            );
+                          })}
+                        </ScrollArea>
+                      </SelectContent>
                     </Select>
                   </FormControl>
                   <FormMessage />
