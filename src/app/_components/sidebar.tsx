@@ -20,7 +20,6 @@ const components = [
   {
     name: "Input Typewriter",
     href: "/input-typewriter",
-    disabled: true,
   },
 ];
 
@@ -38,14 +37,10 @@ export const Sidebar = () => {
               key={index}
               className={cn(
                 "p-2",
-                pathname === item.href && "bg-neutral-100 rounded-md",
-                item.disabled && "opacity-50 cursor-not-allowed"
+                pathname === item.href && "bg-neutral-100 rounded-md"
               )}
             >
-              <li>
-                {item.name}
-                {item.disabled && " (Coming Soon)"}
-              </li>
+              <li>{item.name}</li>
             </Link>
           ))}
         </ul>
