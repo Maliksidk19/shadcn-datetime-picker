@@ -99,6 +99,7 @@ export function DateTimePickerV2() {
                           Number(date) < Date.now() - 1000 * 60 * 60 * 24 ||
                           Number(date) > Date.now() + 1000 * 60 * 60 * 24 * 30
                         }
+                        defaultMonth={field.value}
                       />
                     </PopoverContent>
                   </Popover>
