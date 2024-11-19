@@ -25,7 +25,7 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn("p-3", className)}
+      className={cn("p-2", className)}
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
@@ -33,7 +33,7 @@ function Calendar({
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-sm font-medium",
         caption_dropdowns: cn(
-          "flex justify-between gap-1",
+          "flex justify-between gap-2",
           props.captionLayout === "dropdown" && "w-full"
         ),
         nav: "space-x-1 flex items-center",
