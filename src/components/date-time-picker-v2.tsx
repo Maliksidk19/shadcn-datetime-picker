@@ -95,10 +95,10 @@ export function DateTimePickerV2() {
                         onDayClick={() => setIsOpen(false)}
                         fromYear={2000}
                         toYear={new Date().getFullYear()}
-                        disabled={(date) =>
-                          Number(date) < Date.now() - 1000 * 60 * 60 * 24 ||
-                          Number(date) > Date.now() + 1000 * 60 * 60 * 24 * 30
-                        }
+                        // disabled={(date) =>
+                        //   Number(date) < Date.now() - 1000 * 60 * 60 * 24 ||
+                        //   Number(date) > Date.now() + 1000 * 60 * 60 * 24 * 30
+                        // }
                         defaultMonth={field.value}
                       />
                     </PopoverContent>
