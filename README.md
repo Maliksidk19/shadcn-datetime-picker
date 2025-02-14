@@ -1,12 +1,33 @@
-## Shadcn UI - Datetime Picker
+# Shadcn UI - Datetime Picker
 
-### Version 1
+This project provides a beautifully crafted datetime picker component built using the Shadcn UI. It offers an intuitive interface for selecting dates and times in React applications.
 
-![shadcn-ui-date-time-picker](image.png)
+## Features
 
-In this one, their is a slight layout shift issue on the time picker select component, This only happens if i try to use the select component on popover, else it's working fine. If you have any idea how to fix please feel free to make changes to code.
+- **Date and Time Selection**: Allows users to pick both date and time seamlessly.
+- **Customizable Layout**: Easily adaptable to fit various design requirements.
+- **Responsive Design**: Ensures optimal user experience across different devices.
 
-### Version 2
+## Installation
 
-![shadcn-ui-datetime-picker](image-1.png)
-![time-picker](image-2.png)
+To integrate the Shadcn Datetime Picker into your project, follow these steps:
+
+1. **Install Packages**:
+
+   ```bash
+   npm install
+   ```
+
+2. **Start the Development Server**:
+
+   ```bash
+    npm start
+   ```
+
+## Contributing
+
+We welcome contributions! If you have suggestions or improvements, please feel free to submit a pull request or open an issue.
+
+## License
+
+This project is licensed under the MIT License.

@@ -22,7 +22,7 @@ const TypeWriter = () => {
   const inputFormRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    let typewriter: typeof Typewriter | null = null;
+    const typewriter: typeof Typewriter | null = null;
 
     if (inputFormRef.current) {
       const customNodeCreator = function (character: string) {
@@ -99,7 +99,7 @@ const TypeWriter = () => {
                     type="text"
                     id="prompt"
                     placeholder=""
-                    className="border-none bg-transparent w-full shadow-none focus-visible:ring-0"
+                    className="border-none bg-transparent w-full shadow-none focus-visible:ring-0 focus-visible:ring-offset-0"
                     {...field}
                     ref={inputFormRef}
                   />

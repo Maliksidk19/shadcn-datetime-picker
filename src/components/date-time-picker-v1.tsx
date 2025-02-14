@@ -1,8 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -19,27 +20,21 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
 import { ScrollArea } from "./ui/scroll-area";
 import { toast } from "sonner";
 
 const FormSchema = z.object({
   datetime: z.date({
-    required_error: "Date & time is required!.",
+    required_error: "Date & time is required!",
   }),
 });
 
 export function DatetimePickerV1() {
   const [isOpen, setIsOpen] = useState(false);
   const [time, setTime] = useState<string>("05:00");
-  const [date, setDate] = useState<Date | null>(null);
+  const [date, setDate] = useState<Date | null>(new Date()); // Default button height
+
+  const calendarRef = useRef<HTMLDivElement | null>(null);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
@@ -61,7 +56,7 @@ export function DatetimePickerV1() {
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={"outline"}
+                      variant="outline"
                       className={cn(
                         "w-full font-normal",
                         !field.value && "text-muted-foreground"
@@ -80,46 +75,34 @@ export function DatetimePickerV1() {
                   className="w-auto p-0 flex items-start"
                   align="start"
                 >
-                  <Calendar
-                    mode="single"
-                    captionLayout="dropdown"
-                    selected={date || field.value}
-                    onSelect={(selectedDate) => {
-                      const [hours, minutes] = time?.split(":")!;
-                      selectedDate?.setHours(
-                        parseInt(hours),
-                        parseInt(minutes)
-                      );
-                      setDate(selectedDate!);
-                      field.onChange(selectedDate);
-                    }}
-                    onDayClick={() => setIsOpen(false)}
-                    fromYear={2000}
-                    toYear={new Date().getFullYear()}
-                    disabled={(date) =>
-                      Number(date) < Date.now() - 1000 * 60 * 60 * 24 ||
-                      Number(date) > Date.now() + 1000 * 60 * 60 * 24 * 30
-                    }
-                  />
-                  <Select
-                    defaultValue={time!}
-                    onValueChange={(e) => {
-                      setTime(e);
-                      if (date) {
-                        const [hours, minutes] = e.split(":");
-                        const newDate = new Date(date.getTime());
-                        newDate.setHours(parseInt(hours), parseInt(minutes));
-                        setDate(newDate);
-                        field.onChange(newDate);
+                  <div ref={calendarRef}>
+                    <Calendar
+                      mode="single"
+                      captionLayout="dropdown"
+                      selected={date || field.value}
+                      onSelect={(selectedDate) => {
+                        if (selectedDate) {
+                          const [hours, minutes] = time.split(":");
+                          selectedDate.setHours(
+                            parseInt(hours),
+                            parseInt(minutes)
+                          );
+                          setDate(selectedDate);
+                          field.onChange(selectedDate);
+                        }
+                      }}
+                      onDayClick={() => setIsOpen(false)}
+                      fromYear={2000}
+                      toYear={new Date().getFullYear()}
+                      disabled={(date) =>
+                        Number(date) < Date.now() - 1000 * 60 * 60 * 24 ||
+                        Number(date) > Date.now() + 1000 * 60 * 60 * 24 * 30
                       }
-                    }}
-                    open={true}
-                  >
-                    <SelectTrigger className="font-normal focus:ring-0 w-[120px] my-4 mr-2">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="border-none shadow-none mr-2 fixed top-2 left-0">
-                      <ScrollArea className="h-[15rem]">
+                    />
+                  </div>
+                  <div className="w-[120px] my-4 mr-2">
+                    <ScrollArea className="h-[18rem]">
+                      <div className="flex flex-col gap-2 h-full">
                         {Array.from({ length: 96 }).map((_, i) => {
                           const hour = Math.floor(i / 4)
                             .toString()
@@ -127,15 +110,33 @@ export function DatetimePickerV1() {
                           const minute = ((i % 4) * 15)
                             .toString()
                             .padStart(2, "0");
+                          const timeValue = `${hour}:${minute}`;
                           return (
-                            <SelectItem key={i} value={`${hour}:${minute}`}>
-                              {hour}:{minute}
-                            </SelectItem>
+                            <Button
+                              key={i}
+                              className="w-full text-left px-2"
+                              variant="outline"
+                              onClick={() => {
+                                setTime(timeValue);
+                                if (date) {
+                                  const newDate = new Date(date.getTime());
+                                  newDate.setHours(
+                                    parseInt(hour),
+                                    parseInt(minute)
+                                  );
+                                  setDate(newDate);
+                                  field.onChange(newDate);
+                                }
+                                setIsOpen(false);
+                              }}
+                            >
+                              {timeValue}
+                            </Button>
                           );
                         })}
-                      </ScrollArea>
-                    </SelectContent>
-                  </Select>
+                      </div>
+                    </ScrollArea>
+                  </div>
                 </PopoverContent>
               </Popover>
               <FormDescription>Set your date and time.</FormDescription>

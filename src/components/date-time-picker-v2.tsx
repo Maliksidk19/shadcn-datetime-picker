@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -84,7 +84,7 @@ export function DateTimePickerV2() {
                         captionLayout="dropdown"
                         selected={date || field.value}
                         onSelect={(selectedDate) => {
-                          const [hours, minutes] = time?.split(":")!;
+                          const [hours, minutes] = time.split(":")!;
                           selectedDate?.setHours(
                             parseInt(hours),
                             parseInt(minutes)
@@ -128,7 +128,7 @@ export function DateTimePickerV2() {
                         }
                       }}
                     >
-                      <SelectTrigger className="font-normal focus:ring-0 w-[120px]">
+                      <SelectTrigger className="font-normal focus:ring-0 w-[120px] focus:ring-offset-0">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
