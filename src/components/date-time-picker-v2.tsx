@@ -84,7 +84,7 @@ export function DateTimePickerV2() {
                         captionLayout="dropdown"
                         selected={date || field.value}
                         onSelect={(selectedDate) => {
-                          const [hours, minutes] = time?.split(":")!;
+                          const [hours, minutes] = time.split(":")!;
                           selectedDate?.setHours(
                             parseInt(hours),
                             parseInt(minutes)

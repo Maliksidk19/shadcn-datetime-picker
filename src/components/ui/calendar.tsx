@@ -155,7 +155,7 @@ function Calendar({
         </Select>
       );
     },
-    [hideNavigation, props.selectTriggerClassName]
+    []
   );
 
   return (

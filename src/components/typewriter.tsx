@@ -22,7 +22,7 @@ const TypeWriter = () => {
   const inputFormRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    let typewriter: typeof Typewriter | null = null;
+    const typewriter: typeof Typewriter | null = null;
 
     if (inputFormRef.current) {
       const customNodeCreator = function (character: string) {
