@@ -32,7 +32,7 @@ const AppSidebar = () => {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton>
-                  <Link href="input-typewriter">Input Typewriter</Link>
+                  <Link href="/input-typewriter">Input Typewriter</Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
