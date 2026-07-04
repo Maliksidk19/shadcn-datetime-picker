@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
-import { Toaster } from "sonner";
-import { cn } from "@/lib/utils";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import AppSidebar from "@/components/app-sidebar";
 
-const inter = Inter({ subsets: ["latin"] });
+const geistSans = Geist({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: "Shadcn Datetime Picker",
-  description:
-    "Shadcn Datetime Picker is a simple and easy-to-use datetime picker component for React. It is built with Tailwind CSS and Shadcn UI.",
+  title: "Shadcn DateTime Picker",
+  description: "A fully-featured datetime picker built on shadcn/ui, @daypicker/react v10, and Base UI.",
 };
 
 export default function RootLayout({
@@ -20,23 +18,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn(inter.className, "flex")}>
-        <SidebarProvider>
-          <AppSidebar />
-          <main className="flex-1 h-full">
-            <SidebarTrigger />
-            {children}
-            <Toaster
-              richColors
-              icons={{
-                success: "🎉",
-                error: "🚨",
-                warning: "⚠️",
-              }}
-            />
-          </main>
-        </SidebarProvider>
+    <html
+      lang="en"
+      className={`${geistSans.className} font-sans h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -44,3 +44,9 @@ next-env.d.ts
 bun.lockb
 package-lock.json
 yarn.lock
+
+# agent trust system
+.agent/
+
+# local reference (old codebase)
+old-data/
